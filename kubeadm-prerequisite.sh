@@ -307,11 +307,11 @@ function congratulation_message() {
   echo 
   echo "If you plan to create a new kubernetes cluster (install master) run the following command (replace the <ip-address> part by one of yours ip ($(ip a s |grep enp|grep inet |awk '{ print $2 }'|cut -d '/' -f1|tr '\n' ' '))"
   echo
-  echo "  # kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip-address>"
+  echo "  # sudo -E kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip-address>"
   echo
   echo "If you plan to join an existing cluster use the following command (replace placeholder data with correct ones)"
   echo
-  echo '  # kubeadm join --token <token> <master-ip>:<master-port> --discovery-token-ca-cert-hash sha256:<hash>'
+  echo '  # sudo -E kubeadm join --token <token> <master-ip>:<master-port> --discovery-token-ca-cert-hash sha256:<hash>'
   echo
   echo "Have a lot of fun"
 }
@@ -433,7 +433,7 @@ function run_as_root() {
     #then
     #  sudo $0
     #else
-    su -c "$0" root
+    su -c "bash $0" root
     #fi
 
     echo "Please logout and reconnect to update $USER proxy env var"
