@@ -305,7 +305,7 @@ function congratulation_message() {
   echo 
   echo "You can now install a kubernetes master node or join a already running kubernetes install."
   echo 
-  echo "If you plan to create a new kubernetes cluster (install master) run the following command (replace the <ip-address> part by one of yours ip ($(ip a s |grep enp|grep inet |awk '{ print $2 }'|cut -d '/' -f1|tr '\n' ' '))"
+  echo "If you plan to create a new kubernetes cluster (install master) run the following command (replace the <ip-address> part by one of yours ip (be careful this one has not change)"
   echo
   echo "  # sudo -E kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip-address>"
   echo
