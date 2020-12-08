@@ -274,6 +274,15 @@ function install_kubeadm() {
 function fix_networkmanager() {
   echo '[keyfile]
 unmanaged-devices=interface-name:cali*;interface-name:tunl*;interface-name:vxlan.calico' > /etc/NetworkManager/conf.d/calico.conf
+}
+
+function uninstall_minikube() {
+  which minikube &>/dev/null
+  if [ $? -eq 0 ]
+  then
+    echo "Unininstalling minikube"
+    su -c "minikube delete" $USER
+  fi
 
 }
 
@@ -397,8 +406,9 @@ function main() {
     disable_swap
 
     install_kubeadm
-    fix_networkmanager
     configure_completion
+    fix_networkmanager
+    uninstall_minikube
 
     rename_host
 
