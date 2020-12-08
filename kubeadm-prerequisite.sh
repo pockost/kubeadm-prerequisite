@@ -271,6 +271,12 @@ function install_kubeadm() {
   apt-mark hold kubelet kubeadm kubectl
 }
 
+function fix_networkmanager() {
+  echo '[keyfile]
+unmanaged-devices=interface-name:cali*;interface-name:tunl*;interface-name:vxlan.calico' > /etc/NetworkManager/conf.d/calico.conf
+
+}
+
 
 function configure_completion() {
   echo "Configuring user bashrc in order to enable completion"
@@ -391,6 +397,7 @@ function main() {
     disable_swap
 
     install_kubeadm
+    fix_networkmanager
     configure_completion
 
     rename_host
